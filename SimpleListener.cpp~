@@ -1,7 +1,0 @@
-#include <iostream>
-#include "SimpleListener.h"
-
-void SimpleListener::onEvent(char event[],void* params)
-{
-	std::cout << (char*)params;
-}
