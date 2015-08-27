@@ -18,7 +18,7 @@ At the top of your sketch you must include the **EventDispatcher** header file::
 
     #include <EventDispatcher.h>
 
-And then for retrieve the instance of **EventDispacher**:
+And then for retrieve the instance of **EventDispacher**::
 
     EventDispatcher::getInstance();
 
@@ -28,77 +28,77 @@ Listen a Event
 ~~~~~~
 
 If you want to listen an event you must create a Listener. A Listener is a class that implements the interface Listener provided by EventDispatcher Library.
-Like This:
+Like This::
 
-	/* SimpleListener.h */
-	
-	#ifndef SIMPLELISTENER_H<br>
-	#define SIMPLELISTENER_H<br>
-	
-	#include "Listener.h"
-	
-	class SimpleListener : public Listener
-	{
-		public:
-			void onEvent(char event[],void* params);
-	};
-	
-	#endif
+    /* SimpleListener.h */
+    
+    #ifndef SIMPLELISTENER_H<br>
+    #define SIMPLELISTENER_H<br>
+    
+    #include "Listener.h"
+    
+    class SimpleListener : public Listener
+    {
+        public:
+            void onEvent(char event[],void* params);
+    };
+    
+    #endif
 
-Now suppose that this simple listener must listen the Event "SimpleEvent". You must inform the EventDispatcher.
+Now suppose that this simple listener must listen the Event "SimpleEvent". You must inform the EventDispatcher::
 
-	#include "EventDispatcher.h"	
-	#include "SimpleListener.h"	
-	
-	void setup()
-	{
-		SimpleListener listener;	
-		EventDispatcher::getInstance().addListener("SimpleEvent",&listener);
-		
-		char param[] = "SimpleEvent throwed\n";
-		
-		EventDispatcher::getInstance().throwEvent("SimpleEvent",param);
-	}
+    #include "EventDispatcher.h"    
+    #include "SimpleListener.h"    
+    
+    void setup()
+    {
+        SimpleListener listener;    
+        EventDispatcher::getInstance().addListener("SimpleEvent",&listener);
+        
+        char param[] = "SimpleEvent throwed\n";
+        
+        EventDispatcher::getInstance().throwEvent("SimpleEvent",param);
+    }
 
 After a EventDispatcher::getInstance().throwEvent("SimpleEvent",param) the function onEvent(char event[],void* params) in SimpleListener is called with "SimpleEvent" and "SimpleEvent throwed\n" params.
 
 Listen more Events
 ~~~~~~
 
-If you listeners must listen two or more events you can manage this situation in onEvent function like this:
+If you listeners must listen two or more events you can manage this situation in onEvent function like this::
 
-	#include "EventDispatcher.h"
-	#include "SimpleListener.h"
-	
-	void setup()
-		
-		SimpleListener listener;<br>
-		EventDispatcher::getInstance().addListener("SimpleEvent",&listener);
-		EventDispatcher::getInstance().addListener("AnotherEvent",&listener);
-		
-		char param[] = "SimpleEvent throwed\n";
-		char param2[] = "AnotherEvent throwed\n";
-		
-		EventDispatcher::getInstance().throwEvent("SimpleEvent",param);
-		EventDispatcher::getInstance().throwEvent("AnotherEvent",param2);
-	}
+    #include "EventDispatcher.h"
+    #include "SimpleListener.h"
+    
+    void setup()
+        
+        SimpleListener listener;<br>
+        EventDispatcher::getInstance().addListener("SimpleEvent",&listener);
+        EventDispatcher::getInstance().addListener("AnotherEvent",&listener);
+        
+        char param[] = "SimpleEvent throwed\n";
+        char param2[] = "AnotherEvent throwed\n";
+        
+        EventDispatcher::getInstance().throwEvent("SimpleEvent",param);
+        EventDispatcher::getInstance().throwEvent("AnotherEvent",param2);
+    }
 
-	/* SimpleListener.cpp */
-	
-	#include "SimpleListener.h"
-	#include <string.h>
-	
-	void SimpleListener::onEvent(char event[],void* params)
-	{
-		if(strcmp (event,&"SimpleEvent") == 0)
-		{
-			/*SimpleEvent is throwed*/
-		}
-		else if(strcmp (event,&"AnotherEvent") == 0)
-		{
-			/*AnotherEvent is throwed*/
-		}
-	}
+    /* SimpleListener.cpp */
+    
+    #include "SimpleListener.h"
+    #include <string.h>
+    
+    void SimpleListener::onEvent(char event[],void* params)
+    {
+        if(strcmp (event,&"SimpleEvent") == 0)
+        {
+            /*SimpleEvent is throwed*/
+        }
+        else if(strcmp (event,&"AnotherEvent") == 0)
+        {
+            /*AnotherEvent is throwed*/
+        }
+    }
 
 Advanced Details
 ----------------
