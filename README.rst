@@ -32,8 +32,8 @@ Like This::
 
     /* SimpleListener.h */
     
-    #ifndef SIMPLELISTENER_H<br>
-    #define SIMPLELISTENER_H<br>
+    #ifndef SIMPLELISTENER_H
+    #define SIMPLELISTENER_H
     
     #include "Listener.h"
     
@@ -72,7 +72,7 @@ If you listeners must listen two or more events you can manage this situation in
     
     void setup()
         
-        SimpleListener listener;<br>
+        SimpleListener listener;
         EventDispatcher::getInstance().addListener("SimpleEvent",&listener);
         EventDispatcher::getInstance().addListener("AnotherEvent",&listener);
         
