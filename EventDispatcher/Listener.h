@@ -6,7 +6,7 @@ class Listener
 	public:
     	Listener(){}
     	virtual ~Listener(){}
-	virtual void onEvent(char event[],void* params) = 0;
+	virtual void onEvent(char event,void* params) = 0;
 };
 
 #endif

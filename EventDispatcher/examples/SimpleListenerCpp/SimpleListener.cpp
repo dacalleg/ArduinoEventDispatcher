@@ -2,4 +2,5 @@
 
 void SimpleListener::onEvent(char event,void* params)
 {
+    cout << (char *)params;
 }

@@ -50,17 +50,19 @@ Now suppose that this simple listener must listen the Event "SimpleEvent". You m
     #include "EventDispatcher.h"    
     #include "SimpleListener.h"    
     
+    #define SIMPLE_EVENT 1
+
     void setup()
     {
         SimpleListener listener;    
-        EventDispatcher::getInstance().addListener("SimpleEvent",&listener);
+        EventDispatcher::getInstance().addListener(SIMPLE_EVENT,&listener);
         
         char param[] = "SimpleEvent throwed\n";
         
-        EventDispatcher::getInstance().throwEvent("SimpleEvent",param);
+        EventDispatcher::getInstance().throwEvent(SIMPLE_EVENT,param);
     }
 
-After a EventDispatcher::getInstance().throwEvent("SimpleEvent",param) the function onEvent(char event[],void* params) in SimpleListener is called with "SimpleEvent" and "SimpleEvent throwed\n" params.
+After a EventDispatcher::getInstance().throwEvent(SIMPLE_EVENT,param) the function onEvent(char event,void* params) in SimpleListener is called with "SimpleEvent" and "SimpleEvent throwed\n" params.
 
 Listen more Events
 ~~~~~~
@@ -70,31 +72,33 @@ If you listeners must listen two or more events you can manage this situation in
     #include "EventDispatcher.h"
     #include "SimpleListener.h"
     
+    #define SIMPLE_EVENT 1
+    #define ANOTHER_EVENT 2
+
     void setup()
         
         SimpleListener listener;
-        EventDispatcher::getInstance().addListener("SimpleEvent",&listener);
-        EventDispatcher::getInstance().addListener("AnotherEvent",&listener);
+        EventDispatcher::getInstance().addListener(SIMPLE_EVENT,&listener);
+        EventDispatcher::getInstance().addListener(ANOTHER_EVENT,&listener);
         
         char param[] = "SimpleEvent throwed\n";
         char param2[] = "AnotherEvent throwed\n";
         
-        EventDispatcher::getInstance().throwEvent("SimpleEvent",param);
-        EventDispatcher::getInstance().throwEvent("AnotherEvent",param2);
+        EventDispatcher::getInstance().throwEvent(SIMPLE_EVENT,param);
+        EventDispatcher::getInstance().throwEvent(ANOTHER_EVENT,param2);
     }
 
     /* SimpleListener.cpp */
     
     #include "SimpleListener.h"
-    #include <string.h>
     
-    void SimpleListener::onEvent(char event[],void* params)
+    void SimpleListener::onEvent(char event,void* params)
     {
-        if(strcmp (event,&"SimpleEvent") == 0)
+        if(event == SIMPLE_EVENT)
         {
             /*SimpleEvent is throwed*/
         }
-        else if(strcmp (event,&"AnotherEvent") == 0)
+        else if(event == ANOTHER_EVENT)
         {
             /*AnotherEvent is throwed*/
         }
@@ -127,6 +131,6 @@ For details on these functions you should review *EventDispatcher.h*.
 Copyright
 ~~~~~~~~~
 
-Copyright (c) 2015 Daniele Callegaro
+Copyright (c) 2016 Daniele Callegaro
 
 
