@@ -40,7 +40,7 @@ Like This::
     class SimpleListener : public Listener
     {
         public:
-            void onEvent(char event[],void* params);
+            void onEvent(char event,void* params);
     };
     
     #endif
